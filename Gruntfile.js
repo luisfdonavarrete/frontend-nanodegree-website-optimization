@@ -68,7 +68,21 @@ module.exports = function(grunt) {
                     'components/img/pizzeria-small.jpg': 'components/img/pizzeria.jpg'
                 }
             }
-        }
+        },
+		critical: {
+			test: {
+				options: {
+					base: './',
+					css: [
+						'components/css/style.css'
+            		],
+            		width: 320,
+            		height: 70
+        		},
+        		src: 'index.html',
+        		dest: 'index.html'
+    		}
+		}
     });
     
     // Register customer task for ngrok
@@ -93,6 +107,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-image-resize');
+	grunt.loadNpmTasks('grunt-critical');
 
     // Default task(s).
     grunt.registerTask('default', 'watch');
