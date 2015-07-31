@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     // Register customer task for ngrok
     grunt.registerTask('psi-ngrok', 'Run pagespeed with ngrok', function() {
         var done = this.async();
-        var port = 6060;
+        var port = 8080;
 
         ngrok.connect(port, function(err, url) {
             if (err !== null) {
