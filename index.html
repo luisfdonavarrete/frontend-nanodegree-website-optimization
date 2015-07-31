@@ -5,46 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" FILL ME IN ">
     <meta name="author" content=" FILL ME IN ">
-    <title>Cameron Pittman: Portfolio</title>
+    <title>Cameron Pittman: Portfolio</title> 
 
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
+    <!--
+    I commented this link tag because we are not using the font on the index.html file
+    -->
     <!--<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">-->
-
+	<!--
+  	I used the grunt-critical plugin to inline the critical CSS
+    -->
     <style type="text/css">
-html {
-  font-size: 100%;
-  overflow-y: scroll;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: none;
-}
-body { margin: 0; font-size: 14px; line-height: 1.61; font-weight: 400; }
-body{ font-family: 'Open Sans', sans-serif; color: #333; }
+		html {
+		  font-size: 100%;
+		  overflow-y: scroll;
+		  -webkit-tap-highlight-color: rgba(0,0,0,0);
+		  -ms-text-size-adjust: 100%;
+		  -webkit-text-size-adjust: none;
+		}
+		body { margin: 0; font-size: 14px; line-height: 1.61; font-weight: 400; }
+		body{ font-family: 'Open Sans', sans-serif; color: #333; }
 
-a { color: #12C; }
-img { border: 0; max-width: 100%; }
+		a { color: #12C; }
+		img { border: 0; max-width: 100%; }
 
-body { background: #fff; }
-header{ max-width: 45em; margin: 0 auto; }
+		body { background: #fff; }
+		header{ max-width: 45em; margin: 0 auto; }
 
-header { padding: 0 0.5em; color: #C90B0B; }
-header img { border-radius: 40px; float: left; }
-header p { font-size:1.5em; font-weight: bold; padding-left: 4em;}
-header p span { font-size: 0.8em; font-weight: normal;}
+		header { padding: 0 0.5em; color: #C90B0B; }
+		header img { border-radius: 40px; float: left; }
+		header p { font-size:1.5em; font-weight: bold; padding-left: 4em;}
+		header p span { font-size: 0.8em; font-weight: normal;}
 
 
-@media only screen and (max-width: 480px) {
-  body { font-size: 12px;}
-  header p { padding-left: 4.5em;}
-}
-</style>
-<script>
-(function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(['css/style.min.css','css/print.min.css']));
-</script>
-<noscript>
-<link href="css/style.min.css" rel="stylesheet">
-<link href="css/print.min.css" rel="stylesheet" media="print">
-</noscript>
+		@media only screen and (max-width: 480px) {
+		  body { font-size: 12px;}
+		  header p { padding-left: 4.5em;}
+		}
+	</style>
+	<script>
+		(function(u){function loadCSS(e,t,n){"use strict";function r(){for(var t,i=0;i<d.length;i++)d[i].href&&d[i].href.indexOf(e)>-1&&(t=!0);t?o.media=n||"all":setTimeout(r)}var o=window.document.createElement("link"),i=t||window.document.getElementsByTagName("script")[0],d=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",i.parentNode.insertBefore(o,i),r(),o}for(var i in u){loadCSS(u[i]);}}(['css/style.min.css','css/print.min.css']));
+	</script>
+	<noscript>
+		<link href="css/style.min.css" rel="stylesheet">
+		<link href="css/print.min.css" rel="stylesheet" media="print">
+	</noscript>
     
   </head>
 
@@ -80,6 +85,9 @@ header p span { font-size: 0.8em; font-weight: normal;}
           </li>
 
           <li>
+           <!--
+           I used the grunt-image-resize plugin to resize the image to match its display side.
+           -->
             <img src="img/pizzeria-small.jpg">
             <a href="views/pizza.html">Cam's Pizzeria</a>
             <p>Who wants a performant pizza?</p>
@@ -90,7 +98,9 @@ header p span { font-size: 0.8em; font-weight: normal;}
     <footer>
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
     </footer>
-    <script>
+    
+  </div>
+  <script>
       (function(w,g){w['GoogleAnalyticsObject']=g;
       w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
 
@@ -98,7 +108,12 @@ header p span { font-size: 0.8em; font-weight: normal;}
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
+    <!--
+    I added the async attribute to the script tag and moved them right before the closing body tag
+    in order to hold up the javascript execution code, because analytics.js is a third-party 
+    script that doesn't impact the DOM. 
+    -->
     <script async src="http://www.google-analytics.com/analytics.js"></script>
     <script async src="js/perfmatters.js"></script>
-  </div></body>
+  </body>
 </html>
