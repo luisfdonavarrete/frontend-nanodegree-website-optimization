@@ -43,7 +43,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['components/js/*.js'],
+                files: ['components/js/*.js', 'components/views/js/*.js'],
                 tasks: ['uglify', 'cssmin']
             },
             html: {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
             }
         },
         imagemin: {
-            dynamic: {
+            index_view: {
                 files: [{
                     expand: true,                  
                     cwd: 'components/img/',                   // Src matches are relative to this path
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                     dest: 'img/'                  // Destination path prefix
                 }]
             },
-            pizza: {
+            pizzeria_view: {
                 files: [{
                     expand: true,                  
                     cwd: 'components/views/images/',                   // Src matches are relative to this path
@@ -85,7 +85,16 @@ module.exports = function(grunt) {
                     height: 270
                 },
                 files: {
-                    'views/images/pizzeria-medium.jpg': 'components/views/images/pizzeria.jpg'
+                    'components/views/images/pizzeria-medium.jpg': 'components/views/images/pizzeria.jpg'
+                }
+            },
+            pizza_small: {
+                options: {
+                    width: 73,
+                    height: 100
+                },
+                files: {
+                    'components/views/images/pizza-small.png': 'components/views/images/pizza.png'
                 }
             }
         },
