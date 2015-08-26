@@ -23,15 +23,18 @@ module.exports = function(grunt) {
         uglify: {
              my_target: {
                  files: {
-                     'js/perfmatters.min.js': ['components/js/perfmatters.js']
+                     'js/perfmatters.min.js': ['components/js/perfmatters.js'],
+                     'views/js/main.min.js': ['components/views/js/main.js']                     
                  }
              }
         },
         cssmin: {
             target: {
-                files: {
+                files: {  
                     'css/style.min.css': ['components/css/style.css'],
-                    'css/print.min.css': ['components/css/print.css']
+                    'css/print.min.css': ['components/css/print.css'],
+                    'views/css/style.min.css': ['components/views/css/style.css'],
+                    'views/css/bootstrap-grid.min.css': ['components/views/css/bootstrap-grid.css']
                 }
             }
         },
@@ -56,6 +59,14 @@ module.exports = function(grunt) {
                     src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
                     dest: 'img/'                  // Destination path prefix
                 }]
+            },
+            pizza: {
+                files: [{
+                    expand: true,                  
+                    cwd: 'components/views/images/',                   // Src matches are relative to this path
+                    src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+                    dest: 'views/images/'                  // Destination path prefix
+                }]
             }
         },
         image_resize: {
@@ -67,22 +78,44 @@ module.exports = function(grunt) {
                 files: {
                     'components/img/pizzeria-small.jpg': 'components/img/pizzeria.jpg'
                 }
+            },
+            pizza: {
+                options: {
+                    width: 360,
+                    height: 270
+                },
+                files: {
+                    'views/images/pizzeria-medium.jpg': 'components/views/images/pizzeria.jpg'
+                }
             }
         },
-		critical: {
-			test: {
-				options: {
-					base: './',
-					css: [
-						'components/css/style.css'
-            		],
-            		width: 320,
-            		height: 70
-        		},
-        		src: 'index.html',
-        		dest: 'index.html'
-    		}
-		}
+        critical: {
+            test: {
+                options: {
+                    base: './',
+                    css: [
+                        'components/css/style.css'
+                    ],
+                    width: 320,
+                    height: 70
+                },
+                src: 'index.html',
+                dest: 'index.html'
+            },
+            pizza:{
+                options: {
+                    base: './',
+                    css: [
+                        'components/views/css/style.css',
+                        'components/views/css/bootstrap-grid.css'
+                    ],
+                    width: 320,
+                    height: 70
+                },
+                src: 'views/pizza.html',
+                dest: 'views/pizza.html'
+            }
+        }
     });
     
     // Register customer task for ngrok
