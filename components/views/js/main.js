@@ -448,11 +448,16 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
+  /* I made this changes to the "changePizzaSizes" function: 
+  I add the "pizzasItems" variable to keep track of the pizza element 
+  and the "sizes" array to set the new size according to the "size" parameter
+    */
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    var pizzasItems = document.getElementsByClassName('randomPizzaContainer');
+    var len =  pizzasItems.length;
+    var sizes = [25, 33.33, 50]
+    for (var i = 0; i < len; i++) {
+      pizzasItems[i].style.width = sizes[size - 1] + "%";
     }
   }
 
@@ -482,7 +487,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 // Iterator for number of times the pizzas in the background have scrolled.
 // Used by updatePositions() to decide when to log the average time per frame
 var frame = 0;
-
+/* Variable to keep track of the moving pizzas elements*/
 var itemsPizzas = Array();
 
 // Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
@@ -524,6 +529,7 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+/* The function uses the new image "pizza-small.png" which has the appropriate size, to generate the images elements */
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
@@ -537,6 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
+  /* After the pizza elements has been added to the page the itemsPizzas is setted */
   itemsPizzas = document.getElementsByClassName("mover");
   updatePositions();
 });
