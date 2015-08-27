@@ -16,7 +16,7 @@ The objective in this project was to identify and perform optimizations to achie
   * Run Pagespeed Insights tests https://github.com/jrcryer/grunt-pagespeed
   * Run predefined tasks https://www.npmjs.com/package/grunt-contrib-watch
   
-### The following optimizations were made to ensuring a consitent frame rate at 60fps when scrolling in pizza.html file.0
+### The following optimizations were made to ensuring a consitent frame rate at 60fps when scrolling in pizza.html file.
 
 * I reduced the number of pizza images added in the background because only a handful of them are rendered at any given time on the page.
 * I used the a new image "pizza-small.png" which has the appropriate size, to generate the images elements on the background.
