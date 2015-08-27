@@ -38,19 +38,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        watch: {
-            options: { 
-                livereload: true
-            },
-            scripts: {
-                files: ['components/js/*.js', 'components/views/js/*.js'],
-                tasks: ['uglify', 'cssmin']
-            },
-            html: {
-                files: ['*.html', 'components/css/*.css'],
-                tasks: ['uglify', 'cssmin']
-            }
-        },
         imagemin: {
             index_view: {
                 files: [{
@@ -124,7 +111,20 @@ module.exports = function(grunt) {
                 src: 'views/pizza.html',
                 dest: 'views/pizza.html'
             }
-        }
+        },
+        watch: {
+            options: { 
+                livereload: true
+            },
+            scripts: {
+                files: ['components/js/*.js', 'components/views/js/*.js'],
+                tasks: ['uglify', 'cssmin']
+            },
+            html: {
+                files: ['*.html', 'components/css/*.css'],
+                tasks: ['uglify', 'cssmin']
+            }
+        }      
     });
     
     // Register customer task for ngrok

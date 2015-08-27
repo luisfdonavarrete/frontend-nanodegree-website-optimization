@@ -448,7 +448,7 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  /* I made this changes to the "changePizzaSizes" function: 
+  /* I made these changes to the "changePizzaSizes" function: 
   I add the "pizzasItems" variable to keep track of the pizza element 
   and the "sizes" array to set the new size according to the "size" parameter
     */
@@ -507,7 +507,8 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  
+  /* I added the body bodyScrollTop to avoid recalculating the scrollTop every time inside the foor loop. 
+  this helps us to reduce the Layout event time */
   var len = itemsPizzas.length;
   var bodyScrollTop = document.body.scrollTop;
   for (var i = 0; i < len; i++) {

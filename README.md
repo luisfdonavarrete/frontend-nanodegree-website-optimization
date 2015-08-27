@@ -1,41 +1,31 @@
 # Website Performance Optimization Portfolio Project
 
-In this project I took an existing website an optimized the critical rendering path to achieve a Pagespeed Insights score above 90.  I took the following steps to achieve this performance improvement:
+Website Performance Optimization project for Udacity Front-End Web Developer Nanodegree.
 
-* Utilized Grunt to automate:
-  * Image minification
-  * CSS and Javascript concatenation
-  * CSS and Javascript minification
-  * Running Pagespeed Insights Test
+The objective in this project was to identify and perform optimizations to achieve a PageSpeed score of 90 or above. I made the following changes to the index.html in order to achieve this performance:
 
-* Inlined critical CSS and used JavaScript to load the remaining CSS file after the page loads.
-* Added the 'print' media query to the print.css file because it is only needed when the user wants to print the page, not at page load.
-* Added 'async' tag to the Google Analytics file because it doesn't interact with the DOM and shouldn't block rendering.
-* Used GIMP to resize images to reduce/eliminate the need to resize using CSS.
-
-The pizza.html page has a background that moves when the user scrolls the page.  Initially this animation was very choppy, but I made some changes to achieve a smooth 60fps on scroll.
-
-* I reduced the number of pizza images in the background.  The original code blindly created 200 pizzas no matter what, so many were off the screen and invisible to the user but still taking the computer's resources to move.  Now the program gets the screen size of the device and makes the correct number of pizzas based on that.
-* To move the pizzas the original code changed the left style property of the pizza element.  This is inefficient because the browser needs to composite, paint, and layout the element every time it moves.  I used the translateX style to move the element instead because it only requires compositing (which is cheap).
-* The original code had a scroll event listener and updated the position of the pizzas every time it detected a scroll.  This can be a problem because there can be multiple scroll events detected while the elements are currently updating or about to update.  This will cause the update function to run more times than necessary.  I modified the code so that the update function will only be called if an update isn't currently happening or about to happen.
+* I added the media attribute to the link tag to the print.css file with the value of 'print', because these styles are only used when the users print the page.
+* I added the components folder to save the development version of the css, javascript, and images files.
+* I added the async attribute to the script tags and moved them right before the closing body tag in order to hold up the javascript execution code.
+* Grunt.js and grunt.js modules were used to automate the following tasks:
+  * Javascript minification https://www.npmjs.com/package/grunt-contrib-uglify
+  * CSS minification https://www.npmjs.com/package/grunt-contrib-cssmin
+  * Image minification https://www.npmjs.com/package/grunt-contrib-imagemin
+  * Image resize https://github.com/excellenteasy/grunt-image-resize
+  * Inline cricial CSS https://www.npmjs.com/package/grunt-critical
+  * Run Pagespeed Insights tests https://github.com/jrcryer/grunt-pagespeed
+  * Run predefined tasks https://www.npmjs.com/package/grunt-contrib-watch
   
-### The Following Files Have Been Added or Modified to Improve Performance
-* Gruntfile.js
-* package.json
-* index.html
-* views/pizza.html
-* css/style.css
-* js/analytics.js
-* views/js/main.js
-* views/css/style.css
-* views/js/loadCSS.js
-* All image files
+### The following optimizations were made to ensuring a consitent frame rate at 60fps when scrolling in pizza.html file.0
 
-(Note: all files in "build" folders are just combined and/or minified versions of the above modified files.)
+* I reduced the number of pizza images added in the background because only a handful of them are rendered at any given time on the page.
+* I used the a new image "pizza-small.png" which has the appropriate size, to generate the images elements on the background.
+* I created a new variable, itemsPizzas, to keep track of the pizzas elements, this variable is set only once when the page has finished loaded.
+* I set the itemsPizzas varible using itemsPizzas document.getElementsByClassName() method which is much faster than document.querySelectorAll().
+* I use `transform: translateX()` and `will-change: left;` in the .mover class to force pizza elements into their own composite layer.
 
-### How to Test My Website's Performance
 
-Go to [Pagespeed Insights](https://developers.google.com/speed/pagespeed/insights/) and enter in these urls:
+### To Test the website's performance please go to the following urls:
 
-* http://luisfdonavarrete.github.io/udportfolio/
-* http://luisfdonavarrete.github.io/udportfolio/views/pizza.html
+* [Portfolio index.hml file](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fluisfdonavarrete.github.io%2Fudportfolio%2F) 
+* [Pizzeria Web Page](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fluisfdonavarrete.github.io%2Fudportfolio%2Fviews%2Fpizza.html)
