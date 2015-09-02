@@ -18,10 +18,10 @@ The objective in this project was to identify and perform optimizations to achie
   
 ### The following optimizations were made to ensuring a consitent frame rate at 60fps when scrolling in pizza.html file.
 
-* I reduced the number of pizza images added in the background because only a handful of them are rendered at any given time on the page.
+* I added the functionality needed to insert dynamically the number of pizzas to fill the screen, based on browser window resolution.
 * I used the a new image "pizza-small.png" which has the appropriate size, to generate the images elements on the background.
 * I created a new variable, itemsPizzas, to keep track of the pizzas elements, this variable is set only once when the page has finished loaded.
-* I set the itemsPizzas varible using itemsPizzas document.getElementsByClassName() method which is much faster than document.querySelectorAll().
+* I set the itemsPizzas varible using document.getElementsByClassName() method which is much faster than document.querySelectorAll().
 * I use `transform: translateX()` and `will-change: left;` in the .mover class to force pizza elements into their own composite layer.
 
 
