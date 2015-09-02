@@ -473,8 +473,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
+var pizzasDiv = document.getElementById("randomPizzas");
+for (var i = 2; i < 100; i++) {  
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -488,7 +488,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 // Used by updatePositions() to decide when to log the average time per frame
 var frame = 0;
 /* Variable to keep track of the moving pizzas elements*/
-var itemsPizzas = Array();
+var itemsPizzas = [];
 
 // Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
@@ -509,11 +509,15 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   /* I added the body bodyScrollTop to avoid recalculating the scrollTop every time inside the foor loop. 
   this helps us to reduce the Layout event time */
+  /* I added the phases array to calculate de phase value inside the for loop that makes the animation happend*/
   var len = itemsPizzas.length;
   var bodyScrollTop = document.body.scrollTop;
-  for (var i = 0; i < len; i++) {
-    var phase = Math.sin((bodyScrollTop / 1250) + (i % 5));
-    itemsPizzas[i].style.left = itemsPizzas[i].basicLeft + 100 * phase + 'px';
+  var phases = [];
+  for(var i = 0; i < 5; i++){
+    phases.push(Math.sin((bodyScrollTop / 1250) + i));
+  }
+  for (var i = 0; i < len; i++) {    
+    itemsPizzas[i].style.left = itemsPizzas[i].basicLeft + 100 * phases[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -530,19 +534,23 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
-/* The function uses the new image "pizza-small.png" which has the appropriate size, to generate the images elements */
+/* The function uses the new image "pizza-small.png" which has the appropriate size, to generate the images elements.
+I added the functionality needed to insert dynamically the number of pizzas to fill the screen, based on browser window resolution*/
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
-  var s = 256;
-  for (var i = 0; i < 40; i++) {
-    var elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza-small.png";
-    elem.style.height = "100px";
-    elem.style.width = "73px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+  var pizzaSize = 256;
+  var columns = Math.ceil(window.innerWidth / pizzaSize);
+  var rows = Math.ceil(window.innerHeight / pizzaSize);
+  for(var i = 0; i < rows; i++){
+    for(var j = 0; j < columns; j++){
+      var elem = document.createElement('img');
+      elem.className = 'mover';
+      elem.src = "images/pizza-small.png";
+      elem.style.height = "100px";
+      elem.style.width = "73px";
+      elem.basicLeft = j * pizzaSize;
+      elem.style.top = i * pizzaSize + "px";
+      document.querySelector("#movingPizzas1").appendChild(elem);  
+    }
   }
   /* After the pizza elements has been added to the page the itemsPizzas is setted */
   itemsPizzas = document.getElementsByClassName("mover");
