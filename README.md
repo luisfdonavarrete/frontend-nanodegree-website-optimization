@@ -27,9 +27,9 @@ The objective in this project was to identify and perform optimizations to achie
 
 ### To Test the website's performance please go to the following urls:
 
-* [Portfolio Website](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fluisfdonavarrete.github.io%2Fudportfolio%2F) 
-* [Pizzeria Website](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fluisfdonavarrete.github.io%2Fudportfolio%2Fviews%2Fpizza.html)
+* [Portfolio Website](https://developers.google.com/speed/pagespeed/insights/?url=http://luisfdonavarrete.github.io/frontend-nanodegree-website-optimization/) 
+* [Pizzeria Website](https://developers.google.com/speed/pagespeed/insights/?url=http://luisfdonavarrete.github.io/frontend-nanodegree-website-optimization/views/pizza.html)
 
 ### To test the frame rate, please go to this link:
-* [Pizzeria Website](http://luisfdonavarrete.github.io/udportfolio/views/pizza.html)
+* [Pizzeria Website](http://luisfdonavarrete.github.io/frontend-nanodegree-website-optimization/views/pizza.html)
 
